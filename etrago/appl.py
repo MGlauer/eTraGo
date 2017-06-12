@@ -84,6 +84,12 @@ z = (y - x) / 60
 network.model.write(args['outfile'], io_options={'symbolic_solver_labels':
                                                      True})
 
+# Analyse load shedding
+
+gens = network.generators[network.generators.carrier == 'load shedding'] 
+gen_distribution = network.generators_t.p[gens.index].loc[network.snapshots[14]].groupby(network.generators.bus).sum().reindex(network.buses.index,fill_value=0.)
+gen_distribution.index[gen_distribution != 0]      
+
 # make a line loading plot
 plot_line_loading(network)
 
