@@ -22,8 +22,8 @@ args = {'network_clustering':False,
         'db': 'oedb', # db session
         'gridversion':None, #None for model_draft or Version number (e.g. v0.2.10) for grid schema
         'method': 'lopf', # lopf or pf
-        'start_h': 2320,
-        'end_h' : 2321,
+        'start_h': 2305,
+        'end_h' : 2328,
         'scn_name': 'Status Quo',
         'ormcls_prefix': 'EgoGridPfHv', #if gridversion:'version-number' then 'EgoPfHv', if gridversion:None then 'EgoGridPfHv' 
         'outfile': '/home/ulf/file.lp', # state if and where you want to safe pyomo's lp file
