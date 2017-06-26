@@ -17,21 +17,22 @@ import time
 from egopowerflow.tools.plot import plot_line_loading, plot_stacked_gen, add_coordinates, curtailment, gen_dist 
 from extras.utilities import load_shedding, data_manipulation_sh
 from cluster.networkclustering import busmap_from_psql, cluster_on_extra_high_voltage
+import matplotlib.pyplot as plt
 
 args = {'network_clustering':False,
         'db': 'oedb', # db session
         'gridversion':None, #None for model_draft or Version number (e.g. v0.2.10) for grid schema
         'method': 'lopf', # lopf or pf
-        'start_h': 2305,
-        'end_h' : 2328,
+        'start_h': 2314,
+        'end_h' : 2315,
         'scn_name': 'Status Quo',
         'ormcls_prefix': 'EgoGridPfHv', #if gridversion:'version-number' then 'EgoPfHv', if gridversion:None then 'EgoGridPfHv' 
         'outfile': '/home/ulf/file.lp', # state if and where you want to safe pyomo's lp file
-        'solver': 'gurobi', #glpk or gurobi
-	'branch_capacity_factor': 1, #to globally extend or lower branch capacities
+        'solver': 'glpk', #glpk or gurobi
+	'branch_capacity_factor': 0.7, #to globally extend or lower branch capacities
 	'storage_extendable':False,
 	'load_shedding':True,
-        'generator_noise':False}
+        'generator_noise':True}
 
 
 session = oedb_session(args['db'])
@@ -87,8 +88,10 @@ network.model.write(args['outfile'], io_options={'symbolic_solver_labels':
 # Analyse load shedding
 
 gens = network.generators[network.generators.carrier == 'load shedding'] 
-gen_distribution = network.generators_t.p[gens.index].loc[network.snapshots[14]].groupby(network.generators.bus).sum().reindex(network.buses.index,fill_value=0.)
-gen_distribution.index[gen_distribution != 0]      
+gen_distribution = network.generators_t.p[gens.index].sum()
+total_loadshedding = gen_distribution[gen_distribution != 0]
+total_loadshedding.plot(kind= 'bar', title= "Extent of loadshedding per bus")      
+plt.show()
 
 # make a line loading plot
 plot_line_loading(network)
