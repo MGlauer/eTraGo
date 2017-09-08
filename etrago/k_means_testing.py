@@ -13,7 +13,7 @@ import numpy as np
 from numpy import genfromtxt
 np.random.seed()
 from egopowerflow.tools.tools import oedb_session
-from egopowerflow.tools.io import NetworkScenario
+from egopowerflow.tools.io import NetworkScenario, results_to_oedb
 import time
 from egopowerflow.tools.plot import (plot_line_loading, plot_stacked_gen,
                                      add_coordinates, curtailment, gen_dist,

@@ -20,7 +20,7 @@ from egopowerflow.tools.plot import (plot_line_loading, plot_stacked_gen,
                                      add_coordinates, curtailment, gen_dist,
                                      storage_distribution)
 
-from etrago.extras.utilities import load_shedding, data_manipulation_sh, results_to_csv, parallelisation, pf_post_lopf, loading_minimization, calc_line_losses,kmean_clustering
+from etrago.extras.utilities import load_shedding, data_manipulation_sh, results_to_csv, parallelisation, pf_post_lopf, loading_minimization, calc_line_losses, kmean_clustering
 
 from etrago.cluster.networkclustering import busmap_from_psql, cluster_on_extra_high_voltage
 from pypsa.networkclustering import busmap_by_kmeans, get_clustering_from_busmap
@@ -115,7 +115,7 @@ def etrago(args):
     
     # k-mean clustering
     if args['k_mean_clustering']:
-        kmean_clustering(network)
+        network = kmean_clustering(network)
         
     # Branch loading minimization
     if args['minimize_loading']:
