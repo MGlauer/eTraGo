@@ -3,25 +3,6 @@ K-means testing File
 
 see: https://github.com/openego/eTraGo/issues/6
 
-ToDo's:
--------
-the remaining work would be:
-
-- [x] implement the [todo](https://github.com/openego/eTraGo/blob/features/k-means-clustering/etrago/k_means_testing.py#L112-L115) so that the x of the lines which are newly defined as 380kV lines are adjusted
-
-- [ ] in the [Hoersch and Brown contribution](https://arxiv.org/pdf/1705.07617.pdf) in Chapter II 2) and follwoing the weighting is defined. the weighting right now is equal over all buses. This should be changed to the assumptions with respect to the contribution or define another senseful weighting
-
-- [ ] add functionality to save the resulting cluster for reproducibility
-
-- [ ] convert it to a function and move it [here](https://github.com/openego/eTraGo/blob/features/k-means-clustering/etrago/cluster/networkclustering.py)
-
-Error handling:
-
-* use pip3 install scikit-learn in order to use PyPSA busmap_by_kmeans
-
-
-
-
 """
 __copyright__ = "tba"
 __license__ = "tba"
